@@ -6,6 +6,17 @@
 
 No manual package or skill setup is required first. Codex reads the repository, prepares its environment, uploads the reference, generates and downloads strips, checks and retries defects, reviews the actual motion in the background, and installs the accepted result when authorized. You keep the original ChatGPT page and receive the Codex pet; no extra preview website needs your attention.
 
+## Finished pets
+
+| Headphone Boy | Cherry Cat / 樱桃喵 |
+| :---: | :---: |
+| <img src="examples/headphone-boy/demo.gif" width="192" alt="Nine animation states of the black-haired Headphone Boy"> | <img src="examples/pink-cat-coder/demo.gif" width="192" alt="Nine animation states of the pink-haired Cherry Cat"> |
+| [Details](examples/headphone-boy/) · [Download pet](https://github.com/Andonis75/codex-various-pet/releases/download/v0.1.0/headphone-boy.zip) | [Details](examples/pink-cat-coder/) · [Download pet](https://github.com/Andonis75/codex-various-pet/releases/download/v0.1.0/pink-cat-coder.zip) |
+
+Both have nine animation states and 57 effective atlas cells; the GIFs show the states in sequence. Cherry Cat was produced and installed by a fresh Codex task given only this repository URL and one reference image. One browser verification required human input during that run.
+
+To use a finished pet, see the [installation guide](examples/README.md). To create your own character, attach your image and use the request below.
+
 ## Give this to Codex
 
 Attach the reference in a Codex task with local terminal/file access and browser control:

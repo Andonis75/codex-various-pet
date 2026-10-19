@@ -6,9 +6,16 @@
 
 你不需要先手动安装技能或逐条运行处理命令。Codex 读取仓库说明后准备环境，再自己上传参考、逐状态生成和下载原图、检查缺陷并重试，最后拼图、审查真实动作并安装。默认只需要你原来的 ChatGPT 页面和最终 Codex 成品，无需再操作额外预览网站。
 
-![用本流程完成的示例桌宠](examples/headphone-boy/demo.gif)
+## 成品展示
 
-上图是已完成的示例；你的参考图可以是另一位 Q 版人物或其他适合的角色。
+| 耳机少年 | 樱桃喵 |
+| :---: | :---: |
+| <img src="examples/headphone-boy/demo.gif" width="192" alt="黑发白耳机少年的九种动作预览"> | <img src="examples/pink-cat-coder/demo.gif" width="192" alt="粉发猫耳少女樱桃喵的九种动作预览"> |
+| [成品说明](examples/headphone-boy/) · [下载安装包](https://github.com/Andonis75/codex-various-pet/releases/download/v0.1.0/headphone-boy.zip) | [成品说明](examples/pink-cat-coder/) · [下载安装包](https://github.com/Andonis75/codex-various-pet/releases/download/v0.1.0/pink-cat-coder.zip) |
+
+两套均为九种动作、57 个有效格的透明桌宠，动图按状态顺序展示。樱桃喵来自独立新对话的“仓库链接＋单张参考图”实测，完成了网页生成、检查、组装和安装；中途需人工处理一次网页验证。你的参考图可以是其他角色。
+
+想直接使用成品，见[成品安装说明](examples/README.md)；想制作自己的角色，复制下面的请求并附图即可。
 
 ## 直接交给 Codex
 
