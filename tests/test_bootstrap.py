@@ -17,7 +17,9 @@ class BootstrapTests(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory(prefix="various-pet-bootstrap-test-")
         self.addCleanup(self.temporary.cleanup)
-        self.repo = Path(self.temporary.name) / "checkout"
+        # Windows runners may expose TEMP as RUNNER~1 while bootstrap resolves
+        # it to runneradmin. Compare canonical paths, not two valid spellings.
+        self.repo = (Path(self.temporary.name) / "checkout").resolve()
         (self.repo / "tools").mkdir(parents=True)
         spec = importlib.util.spec_from_file_location("bootstrap_under_test", BOOTSTRAP)
         self.bootstrap = importlib.util.module_from_spec(spec)
