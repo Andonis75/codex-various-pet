@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codex-various-pet"
+version = "0.1.0"
+description = "Turn a reference image and browser-generated animation strips into a Codex desktop pet."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Andonis75"}]
+dependencies = ["Pillow>=12.3", "numpy>=1.26"]
+
+[project.scripts]
+various-pet = "codex_various_pet.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Andonis75/codex-various-pet"
+Issues = "https://github.com/Andonis75/codex-various-pet/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+codex_various_pet = ["data/**/*"]

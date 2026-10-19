@@ -1,0 +1,67 @@
+{
+  "states": {
+    "idle": {
+      "source": "idle-strip.png",
+      "head_width": 271
+    },
+    "running-right": {
+      "source": "running-right-strip.png",
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        3
+      ],
+      "head_width": 246,
+      "edge_cleanup_alpha_max": 128,
+      "approved": true
+    },
+    "running-left": {
+      "mirror": "running-right"
+    },
+    "waving": {
+      "head_width": 379,
+      "source": "waving-strip.png"
+    },
+    "jumping": {
+      "head_width": 307,
+      "source": "jumping-strip.png"
+    },
+    "waiting": {
+      "head_width": 288,
+      "indices": [
+        0,
+        1,
+        2,
+        3,
+        3,
+        5
+      ],
+      "source": "waiting-strip.png"
+    },
+    "running": {
+      "head_width": 311,
+      "source": "running-strip.png"
+    },
+    "review": {
+      "head_width": 304,
+      "indices": [
+        0,
+        1,
+        1,
+        3,
+        4,
+        5
+      ],
+      "source": "review-strip.png"
+    },
+    "failed": {
+      "head_width": 225,
+      "source": "failed-strip.png"
+    }
+  }
+}

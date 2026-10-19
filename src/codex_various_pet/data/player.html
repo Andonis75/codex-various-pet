@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Various Pet · 原生动作预览</title>
+<style>
+:root{font-family:system-ui,"Microsoft YaHei",sans-serif;color:#172437;background:#edf1f7;color-scheme:light;font-synthesis:none}
+*{box-sizing:border-box}body{margin:0;padding:28px}main{max-width:1140px;margin:auto}h1{font-size:25px;margin:0 0 8px}h2{font-size:17px;margin:0 0 14px}p{line-height:1.6}button,select{font:inherit}button{background:#fff;border:1px solid #c8d2e0;border-radius:9px;padding:9px 12px;color:inherit;cursor:pointer}button:hover{border-color:#426dd2}button:focus-visible,input:focus-visible{outline:3px solid #79a4ff;outline-offset:2px}button[aria-pressed=true],button.primary{background:#2457b7;border-color:#2457b7;color:white}button:disabled{opacity:.5;cursor:default}.muted{color:#57677c}.lead{margin:0 0 20px;font-size:14px}.layout{display:grid;grid-template-columns:minmax(420px,1fr) minmax(300px,.8fr);gap:18px}.panel{background:#fff;border:1px solid #d6dfec;border-radius:15px;padding:18px}.states,.controls,.choices{display:flex;gap:8px;flex-wrap:wrap}.states{margin-bottom:16px}.states button{font-size:13px}.stage-wrap{display:flex;justify-content:center;align-items:center;min-height:440px;overflow:auto;padding:12px}.stage{--scale:2;position:relative;width:calc(192px * var(--scale));height:calc(208px * var(--scale));flex:none;border-radius:10px;overflow:hidden;background-color:#eef0f4;background-image:linear-gradient(45deg,#dce2e9 25%,transparent 25%),linear-gradient(-45deg,#dce2e9 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#dce2e9 75%),linear-gradient(-45deg,transparent 75%,#dce2e9 75%);background-size:32px 32px;background-position:0 0,0 16px,16px -16px,-16px 0;box-shadow:0 0 0 1px #b7c3d4}.stage.dark{background-color:#192332;background-image:linear-gradient(45deg,#25354a 25%,transparent 25%),linear-gradient(-45deg,#25354a 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#25354a 75%),linear-gradient(-45deg,transparent 75%,#25354a 75%)}.sprite{position:absolute;inset:0;background-repeat:no-repeat}.grid{display:none;position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(to right,#e6476c45 1px,transparent 1px),linear-gradient(to bottom,#e6476c45 1px,transparent 1px);background-size:calc(24px * var(--scale)) calc(24px * var(--scale));outline:1px solid #ef4068;outline-offset:-1px}.stage.grid-on .grid{display:block}.grid:before{content:"";position:absolute;left:0;right:0;top:calc(196px * var(--scale));border-top:1px dashed #ed3868}.grid:after{content:"";position:absolute;left:50%;top:0;bottom:0;border-left:1px dashed #ed3868}.progress{height:5px;background:#e0e6ef;border-radius:4px;overflow:hidden;margin:12px 0}.progress span{display:block;height:100%;background:#4272d9;width:0}.frame-info{font-variant-numeric:tabular-nums;font-size:14px;line-height:1.8;min-height:54px}.controls{margin-top:12px}.choices{align-items:center;margin-top:12px;font-size:13px}.choices label{display:flex;gap:5px;align-items:center}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.stat{background:#f2f5fa;border-radius:10px;padding:12px}.stat b{display:block;font-size:19px}.stat small{color:#57677c}ul{padding-left:20px;line-height:1.65}code{font-family:ui-monospace,Consolas,monospace;font-size:12px;overflow-wrap:anywhere}details{margin-top:16px}summary{cursor:pointer;font-size:14px}pre{white-space:pre-wrap;word-break:break-word;font-size:11px;max-height:400px;overflow:auto;background:#f2f5fa;padding:12px;border-radius:9px}.note{border-left:3px solid #d3a037;background:#fff7e6;padding:10px 12px;font-size:13px;line-height:1.6}.meta{font-size:12px;line-height:1.7}.sequence{color:#2457b7;font-size:13px;min-height:22px;margin-top:12px}.row-strip{overflow-x:auto;margin-top:16px;display:flex;gap:6px;padding-bottom:8px}.thumb{flex:none;width:96px}.thumb-image{height:104px;width:96px;background-repeat:no-repeat;background-color:#e7ecf3;border-radius:6px}.thumb small{display:block;font-size:10px;margin-top:5px;line-height:1.5;text-align:center}.footer{margin:20px 0 0;font-size:12px;color:#57677c}.screen-reader{position:absolute;left:-10000px} @media(max-width:850px){body{padding:14px}.layout{grid-template-columns:1fr}.stage-wrap{min-height:440px}.panel{padding:14px}} @media(prefers-reduced-motion:reduce){.progress{transition:none}}
+</style></head><body><main>
+<h1>Various Pet · 原生动作预览</h1>
+<p class="lead muted">离线文件 · 直接裁切真实雪碧图 · 9 行原生节奏 · 不新增或补画角色</p>
+<div class="layout"><section class="panel" aria-label="动作预览">
+<div class="states" id="states"></div>
+<div class="stage-wrap"><div class="stage" id="stage"><div class="sprite" id="sprite" role="img" aria-label="宠物当前帧"></div><div class="grid"></div></div></div>
+<div class="progress"><span id="progress"></span></div>
+<div class="frame-info" id="frame-info"></div>
+<div class="controls"><button class="primary" id="play">播放</button><button id="previous">上一帧</button><button id="next">下一帧</button><button id="all">九动作依次一轮</button></div>
+<div class="choices"><button id="scale1" aria-pressed="false">1× 原格</button><button id="scale2" aria-pressed="true">2× 放大</button><label><input type="checkbox" id="grid-toggle">格线 / 脚底参考线</label><label><input type="checkbox" id="dark-toggle">深色背景</label><label><input type="checkbox" id="native" checked>原生三轮后待机</label></div>
+<div id="sequence" class="sequence" role="status"></div>
+<details><summary>当前动作逐帧缩略图（原图 50%）</summary><div class="row-strip" id="row-strip"></div></details>
+</section><aside class="panel"><h2 id="state-title"></h2>
+<div class="stats"><div class="stat"><b id="count"></b><small>有效帧 / 行</small></div><div class="stat"><b id="cycle"></b><small>原生单轮时长</small></div><div class="stat"><b id="head"></b><small>估计输出头宽（px）</small></div><div class="stat"><b id="lift"></b><small>本行记录最大抬升（px）</small></div></div>
+<p class="meta" id="durations"></p><div class="note" id="source-note"></div>
+<ul id="checks" class="meta"></ul><details><summary>本行质量源数据</summary><pre id="quality-row"></pre></details>
+<details><summary>来源与预览说明</summary><div class="meta" id="provenance"></div><p class="meta">普通播放：待机持续循环，其他动作重复三轮后回待机。关闭原生三轮选项可单动作持续循环。九动作依次一轮会各播放一个周期后停止；该模式用于检查动作衔接，和桌面原生三轮行为分开标记。暂停会保留本帧剩余时长。格线每 24 原像素一格，粉色虚线是 x=96 中线与 y=196 脚底注册参考线，不对角色增加任何位移。</p></details>
+</aside></div><p class="footer">这个预览证明的是生成文件能被逐帧查看；角色一致性、步态和动作质量仍需人工观看，页面不会自动宣称通过。</p>
+</main><script id="preview-data" type="application/json">__DATA__</script><script>
+'use strict';
+const data=JSON.parse(document.getElementById('preview-data').textContent);
+const $=id=>document.getElementById(id);
+const stateButtons=[];
+let stateIndex=0,frame=0,scale=2,playing=false,timer=null,due=0,remaining=null,cycles=0,sequence=false;
+document.title=data.displayName+' · 动作预览';
+document.querySelector('h1').textContent=data.displayName+' · 动作预览';
+const atlasUrl='data:image/png;base64,'+data.imageBase64;
+$('sprite').style.backgroundImage=`url(${atlasUrl})`;
+const current=()=>data.states[stateIndex];
+const total=state=>state.durations.reduce((a,b)=>a+b,0);
+const number=(value,suffix='')=>typeof value==='number'&&Number.isFinite(value)?String(Math.round(value*10)/10)+suffix:'未测量';
+function sourceFrame(state,index){
+ const rows=data.quality.rows||{};let row=rows[state.name]||{};
+ const sourceRow=row.derived_from?rows[row.derived_from]||row:row;
+ const detail=(row.output_frames||sourceRow.output_frames||[])[index];
+ const sourceIndex=detail?.source_index??row.selected_indices?.[index]??sourceRow.selected_indices?.[index];
+ let label=sourceIndex==null?'源帧未知':`源帧 ${sourceIndex+1}`;
+ if(detail?.kind==='hold')label+=` · hold（重复输出帧 ${(detail.repeat_of_output_frame??0)+1}）`;
+ if(row.mirrored_each_frame)label+=' · 水平镜像';
+ return label;
+}
+function renderFrame(){
+ const state=current();
+ $('stage').style.setProperty('--scale',scale);
+ $('sprite').style.backgroundSize=`${1536*scale}px ${1872*scale}px`;
+ $('sprite').style.backgroundPosition=`${-frame*192*scale}px ${-state.row*208*scale}px`;
+ $('sprite').setAttribute('aria-label',`${state.label} 第 ${frame+1} / ${state.count} 帧`);
+ $('frame-info').replaceChildren();
+ const line1=document.createElement('div');line1.textContent=`第 ${state.row+1} 行（索引 ${state.row}） · 帧 ${frame+1} / ${state.count} · 本帧 ${state.durations[frame]} ms`;
+ const line2=document.createElement('div');line2.className='muted';line2.textContent=sourceFrame(state,frame);
+ $('frame-info').append(line1,line2);
+ $('progress').style.width=((frame+1)/state.count*100)+'%';
+ stateButtons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===stateIndex)));
+ $('play').textContent=playing?'暂停':'播放';
+ $('all').setAttribute('aria-pressed',String(sequence));
+ $('scale1').setAttribute('aria-pressed',String(scale===1));$('scale2').setAttribute('aria-pressed',String(scale===2));
+}
+function refreshDetails(){
+ const state=current(),row=(data.quality.rows||{})[state.name]||{},transform=(data.quality.transforms||{})[state.name]||{};
+ const sourceRow=row.derived_from?(data.quality.rows||{})[row.derived_from]||row:row;
+ $('state-title').textContent=state.label+' / '+state.name;
+ $('count').textContent=state.count;$('cycle').textContent=(total(state)/1000).toFixed(2)+' s';
+ $('head').textContent=number(transform.estimated_output_head_width);$('lift').textContent=number(transform.jump_lift_px);
+ $('durations').textContent='逐帧时长：'+state.durations.join(' / ')+' ms';
+ const notes=[];
+ const holds=row.hold_frame_count??sourceRow.hold_frame_count;
+ const unique=row.unique_source_frame_count??sourceRow.unique_source_frame_count;
+ notes.push(holds==null?'quality 未记录 hold 帧数。':`${unique??'未知'} 个独立源姿势，${holds} 个 hold 重复帧。hold 为真实源帧复用，不算新增生成帧。`);
+ if(row.mirrored_each_frame||row.derived_from)notes.push(`来自 ${row.derived_from||'其他行'} 的逐帧水平镜像；${row.temporal_order_reversed===false?'时间顺序保持不变。':'quality 未注明时间顺序。'}`);
+ else notes.push('该行未被 quality 标为镜像派生。');
+ $('source-note').textContent=notes.join(' ');
+ const checks=[`输出姿势最大高度：${number(transform.output_max_height,' px')}`,`统一缩放依据：${transform.scale_basis||'未记录'}`,`几何检查：${row.geometry_ok===true?'源报告通过（不代表语义验收）':row.geometry_ok===false?'源报告未通过':'未记录'}`,`源图检测姿势数：${row.detected_count??'未记录'}`,`最终完整性：${data.quality.complete===true?'源报告九动作齐全':'源报告尚未声称齐全'}`];
+ $('checks').replaceChildren(...checks.map(text=>{const li=document.createElement('li');li.textContent=text;return li;}));
+ const compact={...row,poses:row.poses?.map(p=>({bbox:p.bbox,pixels:p.pixels})),edge_cleanup:row.edge_cleanup?.map(e=>({source_index:e.source_index,removed_pixel_count:e.removed_pixel_count,opaque_pixels_removed:e.opaque_pixels_removed}))};
+ $('quality-row').textContent=JSON.stringify({row:compact,transform},null,2);
+ $('row-strip').replaceChildren(...Array.from({length:state.count},(_,index)=>{
+  const wrap=document.createElement('div');wrap.className='thumb';
+  const img=document.createElement('div');img.className='thumb-image';img.style.backgroundImage=`url(${atlasUrl})`;img.style.backgroundSize='768px 936px';img.style.backgroundPosition=`${-index*96}px ${-state.row*104}px`;
+  const label=document.createElement('small');label.textContent=`${index+1}: ${sourceFrame(state,index)}`;wrap.append(img,label);return wrap;
+ }));
+}
+function clear(){if(timer!==null)window.clearTimeout(timer);timer=null;}
+function queue(delay){clear();const ms=Math.max(0,delay);due=performance.now()+ms;timer=window.setTimeout(advance,ms);}
+function updateSequence(text){$('sequence').textContent=text;}
+function advance(){
+ timer=null;if(!playing)return;
+ const state=current();frame++;
+ if(frame>=state.count){frame=0;cycles++;
+  if(sequence){
+   if(stateIndex===data.states.length-1){sequence=false;playing=false;frame=state.count-1;remaining=null;renderFrame();updateSequence('九动作各一轮播放完毕。请人工检查脚底注册、跳跃升降、头部大小和动作衔接。');return;}
+   stateIndex++;cycles=0;refreshDetails();updateSequence(`依次播放 ${stateIndex+1} / 9：${current().label}`);
+  }else if($('native').checked&&state.name!=='idle'&&cycles>=3){stateIndex=0;cycles=0;refreshDetails();updateSequence('已按桌面原生行为：动作三轮后回到待机。');}
+ }
+ remaining=null;renderFrame();queue(current().durations[frame]);
+}
+function pause(){if(playing){remaining=Math.max(0,due-performance.now());playing=false;clear();renderFrame();}}
+function play(){if(!playing){playing=true;renderFrame();queue(remaining??current().durations[frame]);}}
+function choose(index){clear();stateIndex=index;frame=0;cycles=0;remaining=null;sequence=false;updateSequence('');refreshDetails();renderFrame();if(playing)queue(current().durations[frame]);}
+function step(delta){pause();sequence=false;cycles=0;frame=(frame+delta+current().count)%current().count;remaining=null;updateSequence('逐帧查看：暂停播放。');renderFrame();}
+data.states.forEach((state,index)=>{const button=document.createElement('button');button.textContent=state.label;button.type='button';button.setAttribute('aria-pressed','false');button.addEventListener('click',()=>choose(index));$('states').append(button);stateButtons.push(button);});
+$('play').addEventListener('click',()=>playing?pause():play());$('previous').addEventListener('click',()=>step(-1));$('next').addEventListener('click',()=>step(1));
+$('all').addEventListener('click',()=>{clear();stateIndex=0;frame=0;cycles=0;remaining=null;sequence=true;playing=true;refreshDetails();renderFrame();updateSequence('依次播放 1 / 9：待机');queue(current().durations[0]);});
+$('scale1').addEventListener('click',()=>{scale=1;renderFrame();});$('scale2').addEventListener('click',()=>{scale=2;renderFrame();});
+$('grid-toggle').addEventListener('change',e=>$('stage').classList.toggle('grid-on',e.target.checked));$('dark-toggle').addEventListener('change',e=>$('stage').classList.toggle('dark',e.target.checked));
+$('native').addEventListener('change',()=>{cycles=0;});
+$('provenance').textContent=`雪碧图：${data.atlasPath}（1536×1872）；SHA-256 ${data.sha256}；质量源：${data.qualityPath}。本文件内嵌图片与质量信息，移动 HTML 到其他目录后仍可离线打开。`;
+refreshDetails();renderFrame();
+</script></body></html>
